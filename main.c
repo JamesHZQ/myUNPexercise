@@ -8,21 +8,16 @@
 //    return;
 //}
 /*
-void str_echo(int sockfd){
-    long arg1,arg2;
-    ssize_t n;
+void
+str_echo(int sockfd){
     char line[MAXLINE];
-    for(;;){
-       if((n=Readline(sockfd,line,MAXLINE))==0)
-           return;
-       if(sscanf(line,"%ld%ld",&arg1,&arg2)==2)
-           snprintf(line, sizeof(line),"%ld\n",arg1+arg2);
-       else
-           snprintf(line, sizeof(line),"inout error\n");
-       n=strlen(line);
-       Writen(sockfd,line,n);
-    }
-}
+    FILE *fpin,*fpout;
+    fpin = Fdopen(sockfd,"r");
+    fpout = Fdopen(sockfd,"w");
+    while(Fgets(line,MAXLINE,fpin) != NULL)
+        Fputs(line,fpout);
+} 
+
 int main(int argc,char**argv){
     int i,maxi,maxfd,listenfd,connfd,sockfd;
     int nready,client[FD_SETSIZE];
