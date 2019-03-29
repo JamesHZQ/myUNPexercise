@@ -36,7 +36,7 @@ int main(int argc,char **argv){
         n=Select(maxfd+1,&rs,&ws,NULL,NULL);       //select等待其中某些描述符可读或可写
         for(i=0;i<nfiles;i++){                     //遍历所有文件
             flags=file[i].f_flags;
-            if(flags==0||flags&F_DONE)             //文件未建立连接或已完成下载任务就跳过
+            if(flags==0||flags&F_DONE)             //文件未建立连接或已完成下载任务就跳过,选择状态为CONNECTING或READING的文件
                 continue;
             fd=file[i].f_fd;                       //提取文件套接字描述符
             if(flags & F_CONNECTING && (FD_ISSET(fd,&rs)||FD_ISSET(fd,&ws))){           //如果文件处于连接中状态，且文件套接字可读或可写

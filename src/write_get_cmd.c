@@ -3,7 +3,7 @@ void write_get_cmd(struct file *fptr){
     int n;
     char line[MAXLINE];
     n=snprintf(line, sizeof(line),GET_CMD,fptr->f_name);
-    writen(fptr->f_fd,line,n);
+    Writen(fptr->f_fd,line,n);
     printf("wrote %d bytes for %s\n",n,fptr->f_name);
 
     fptr->f_flags = F_READING;                          //将fptr的状态改为READING
