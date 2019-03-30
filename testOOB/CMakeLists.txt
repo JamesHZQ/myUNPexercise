@@ -6,6 +6,6 @@ set(CMAKE_C_STANDARD 99)
 INCLUDE_DIRECTORIES(usr/local/include)
 link_directories(/usr/local/lib)
 
-add_executable(testOOB main.c)
+add_executable(testOOB main.c tcprecv1.c)
 
 target_link_libraries(${PROJECT_NAME} unp pthread)
