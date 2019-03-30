@@ -72,7 +72,7 @@ int main(int argc,char**argv){
 
     for(;;){
         len=addrlen;
-        connfd - Accept(listenfd,cliaddr,&len);
+        connfd = Accept(listenfd,cliaddr,&len);
         Pthread_create(&tid,NULL,&doit,(void*)connfd);
     }
 }
