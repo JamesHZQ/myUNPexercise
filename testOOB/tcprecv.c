@@ -15,12 +15,12 @@ int main(int argc,char **argv){
         err_quit("usage:tcprecv [<host>] [port#]");
     connfd = Accept(listenfd,NULL,NULL);
 
-    FD_ZERO(rset);
-    FD_ZERO(xset);
+    FD_ZERO(&rset);
+    FD_ZERO(&xset);
     for(;;){
         FD_SET(connfd,&rset);
         FD_SET(connfd,&xset);
-        Selcet(connfd+1,&rset,&wset,NULL);
+        Select(connfd+1,&rset,NULL,&xset,NULL);
         if(FD_ISSET(connfd,&xset)){
             n=Recv(connfd,buf,sizeof(buf)-1,MSG_OOB);
             buf[n]=0;
